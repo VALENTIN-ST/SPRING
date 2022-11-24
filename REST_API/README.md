@@ -4,7 +4,7 @@ Build Restful CRUD API for a product online store.
 
 ## Technologies 
 
-- Java JDK 17
+- Java JDK 1.8
 - Maven version 3.8.6
 - Spring Boot version 2.7.4
 - Spring Data JPA, Hibernate
