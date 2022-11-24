@@ -18,10 +18,6 @@ Build Restful CRUD API for a product online store.
 
 **1. Clone the application**
 
-```bash
-git clone https://github.com/bayubagusbagaswara/product-restful-api.git
-```
-
 **2. Create PostgreSQL database**
 
 ```bash
