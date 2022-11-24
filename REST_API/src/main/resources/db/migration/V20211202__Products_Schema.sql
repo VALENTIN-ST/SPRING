@@ -1,12 +1,28 @@
+--create table products (
+--    id varchar2(64) default SYS_GUID() not null primary key ,
+--    created_at timestamp default systimestamp not null ,
+--    status_record varchar2(255) not null,
+--    updated_at timestamp not null,
+--    created_by varchar2(255),
+--    updated_by varchar2(255),
+--    description varchar2(255) not null,
+--    name varchar2(100) not null,
+--    price number(19,2) not null,
+--    quantity number(10) not null
+--);
+
+
+
 create table products (
-    id character varying(64) not null primary key default uuid_generate_v4(),
-    created_at timestamp without time zone not null default now(),
-    status_record character varying(255) not null,
-    updated_at timestamp without time zone not null,
-    created_by character varying(255),
-    updated_by character varying(255),
-    description character varying(255) not null,
-    name character varying(100) not null,
-    price numeric(19,2) not null,
-    quantity integer not null
+    id number(19) not null primary key,
+    created_at timestamp default systimestamp not null ,
+    status_record varchar2(255) not null,
+    updated_at timestamp not null,
+    created_by varchar2(255),
+    updated_by varchar2(255),
+    description varchar2(255) not null,
+    name varchar2(100) not null,
+    price number(19,2) not null,
+    quantity number(10) not null
 );
+
