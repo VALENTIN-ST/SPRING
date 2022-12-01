@@ -48,7 +48,7 @@ import java.util.Set;
 public class User extends DateAudit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "first_name", length = 40, nullable = false)
