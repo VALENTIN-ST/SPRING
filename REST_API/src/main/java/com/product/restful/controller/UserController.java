@@ -57,18 +57,4 @@ public class UserController {
         return new ResponseEntity<>(new MessageResponse(Boolean.TRUE, "You successfully deleted profile of: " + username), HttpStatus.OK);
     }
 
-//    @PutMapping(value = "/{username}/giveAdmin")
-//    @PreAuthorize(value = "hasAuthority('ADMIN')")
-//    public ResponseEntity<MessageResponse> giveAdmin(@PathVariable(name = "username") String username) {
-//        userService.giveAdmin(username);
-//        return new ResponseEntity<>(new MessageResponse(Boolean.TRUE, "You gave ADMIN role to user: " + username), HttpStatus.OK);
-//    }
-//
-//    @PutMapping(value = "/{username}/removeAdmin")
-//    @PreAuthorize(value = "hasAuthority('ADMIN')")
-//    public ResponseEntity<MessageResponse> removeAdmin(@PathVariable(name = "username") String username) {
-//        userService.removeAdmin(username);
-//        return new ResponseEntity<>(new MessageResponse(Boolean.TRUE, "You took ADMIN role from user: " + username), HttpStatus.OK);
-//    }
-
 }
