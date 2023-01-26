@@ -20,8 +20,9 @@ import java.time.Instant;
 @Builder
 public class RefreshToken extends UserDateAudit {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "refresh_generator")
+    @SequenceGenerator(name="refresh_generator", sequenceName = "REFRESH_TOKENS_ID_SEQ", allocationSize=1)
     private Long id;
 
     @OneToOne

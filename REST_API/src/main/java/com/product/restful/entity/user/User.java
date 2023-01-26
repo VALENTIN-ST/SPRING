@@ -27,6 +27,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
@@ -47,8 +48,9 @@ import java.util.Set;
 @Where(clause = "status_record = 'ACTIVE'")
 public class User extends DateAudit {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @SequenceGenerator(name="user_generator", sequenceName = "USER_ID_SEQ", allocationSize=1)
     private Long id;
 
     @Column(name = "first_name", length = 40, nullable = false)

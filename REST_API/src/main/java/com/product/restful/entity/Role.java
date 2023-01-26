@@ -18,6 +18,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.time.Instant;
@@ -32,8 +33,9 @@ import java.time.Instant;
 @Where(clause = "status_record = 'ACTIVE'")
 public class Role extends DateAudit {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_generator")
+    @SequenceGenerator(name="role_generator", sequenceName = "ROLES_ID_SEQ", allocationSize=1)
     private Long id;
 
     @Enumerated(EnumType.STRING)

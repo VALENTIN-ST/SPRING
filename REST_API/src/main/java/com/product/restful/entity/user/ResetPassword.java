@@ -19,7 +19,8 @@ public class ResetPassword {
     private static final Integer RESET_PASSWORD_EXPIRY_DAYS = 15;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reset_generator")
+    @SequenceGenerator(name="reset_generator", sequenceName = "RESET_PASSWORD_ID_SEQ", allocationSize=1)
     private Long id;
 
     private LocalDateTime generated = LocalDateTime.now();
