@@ -30,23 +30,23 @@ public interface UserService {
 
     UserDTO updateUser(String username, UpdateUserRequest updateUserRequest);
 
-    void giveAdmin(String username);
+//    void giveAdmin(String username);
+//
+//    void removeAdmin(String username);
 
-    void removeAdmin(String username);
-
-    void verifyUserByUsername(String username);
+//    void verifyUserByUsername(String username);
 
     void verifyUserByUsernameOrEmail(String usernameOrEmail);
 
-    void verifyEmail(String email);
+//    void verifyEmail(String email);
 
     User getUser(Long userId);
 
-    void verifyEmailActivation(String uniqueCode);
+//    void verifyEmailActivation(String uniqueCode);
+//
+//    UserDTO verifyResetPasswordLink(String uniqueCode);
 
-    UserDTO verifyResetPasswordLink(String uniqueCode);
+//    void setNewPassword(User user, String password);
 
-    void setNewPassword(User user, String password);
-
-    void forgotPassword(String email);
+//    void forgotPassword(String email);
 }

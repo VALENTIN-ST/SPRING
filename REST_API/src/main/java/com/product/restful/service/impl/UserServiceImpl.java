@@ -175,24 +175,24 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(user.getId());
     }
 
-    @Override
-    public void giveAdmin(String username) {
-        User user = userRepository.getUserByName(username);
-        user.addRole(roleRepository.getByName(RoleName.ADMIN.name()).orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
-        userRepository.save(user);
-    }
+//    @Override
+//    public void giveAdmin(String username) {
+//        User user = userRepository.getUserByName(username);
+//        user.addRole(roleRepository.getByName(RoleName.ADMIN.name()).orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+//        userRepository.save(user);
+//    }
+//
+//    @Override
+//    public void removeAdmin(String username) {
+//        User user = userRepository.getUserByName(username);
+//        user.removeRole(roleRepository.getByName(RoleName.ADMIN.name()).orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+//        userRepository.save(user);
+//    }
 
-    @Override
-    public void removeAdmin(String username) {
-        User user = userRepository.getUserByName(username);
-        user.removeRole(roleRepository.getByName(RoleName.ADMIN.name()).orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
-        userRepository.save(user);
-    }
-
-    @Override
-    public void verifyUserByUsername(String username) {
-        userRepository.getUserByName(username);
-    }
+//    @Override
+//    public void verifyUserByUsername(String username) {
+//        userRepository.getUserByName(username);
+//    }
 
     @Override
     public void verifyUserByUsernameOrEmail(String usernameOrEmail) {
@@ -200,50 +200,50 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User not found with this username or email: %s", usernameOrEmail)));
     }
 
-    @Override
-    public void verifyEmail(String email) {
-        userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
-    }
+//    @Override
+//    public void verifyEmail(String email) {
+//        userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+//    }
 
-    @Override
-    public void verifyEmailActivation(String uniqueCode) {
-        ResetPassword resetPassword = resetPasswordRepository.findByUniqueCode(uniqueCode).orElseThrow(() -> new ResetPasswordInvalidException("Unique Code Tidak Terdaftar"));
-        User user = resetPassword.getUser();
-        user.setUserActive(true);
-        userRepository.save(user);
-    }
+//    @Override
+//    public void verifyEmailActivation(String uniqueCode) {
+//        ResetPassword resetPassword = resetPasswordRepository.findByUniqueCode(uniqueCode).orElseThrow(() -> new ResetPasswordInvalidException("Unique Code Tidak Terdaftar"));
+//        User user = resetPassword.getUser();
+//        user.setUserActive(true);
+//        userRepository.save(user);
+//    }
 
-    @Override
-    public UserDTO verifyResetPasswordLink(String uniqueCode) {
-        ResetPassword resetPassword = resetPasswordRepository.findByUniqueCode(uniqueCode).orElseThrow(() -> new ResetPasswordInvalidException("Invalid code " + uniqueCode));
+//    @Override
+//    public UserDTO verifyResetPasswordLink(String uniqueCode) {
+//        ResetPassword resetPassword = resetPasswordRepository.findByUniqueCode(uniqueCode).orElseThrow(() -> new ResetPasswordInvalidException("Invalid code " + uniqueCode));
+//
+//        if (LocalDateTime.now().isAfter(resetPassword.getExpired())) {
+//            throw new ResetPasswordInvalidException("Unique code " + uniqueCode + " expired");
+//        }
+//        User user = resetPassword.getUser();
+//        resetPasswordRepository.deleteByUser(user);
+//        return userMapper.mapFromUser(user);
+//    }
 
-        if (LocalDateTime.now().isAfter(resetPassword.getExpired())) {
-            throw new ResetPasswordInvalidException("Unique code " + uniqueCode + " expired");
-        }
-        User user = resetPassword.getUser();
-        resetPasswordRepository.deleteByUser(user);
-        return userMapper.mapFromUser(user);
-    }
+//    @Override
+//    public void setNewPassword(User user, String password) {
+//        UserPassword userPassword = userPasswordRepository.findByUser(user);
+//        if (userPassword == null) {
+//            userPassword = new UserPassword();
+//            userPassword.setUser(user);
+//        }
+//        userPassword.setPassword(passwordEncoder.encode(password));
+//        userPasswordRepository.save(userPassword);
+//    }
 
-    @Override
-    public void setNewPassword(User user, String password) {
-        UserPassword userPassword = userPasswordRepository.findByUser(user);
-        if (userPassword == null) {
-            userPassword = new UserPassword();
-            userPassword.setUser(user);
-        }
-        userPassword.setPassword(passwordEncoder.encode(password));
-        userPasswordRepository.save(userPassword);
-    }
-
-    @Override
-    public void forgotPassword(String email) {
-        Optional<User> optionalUser = userRepository.findByEmail(email);
-        if (optionalUser.isPresent()) {
-            resetPasswordRepository.deleteByUser(optionalUser.get());
-            ResetPassword resetPassword = new ResetPassword();
-            resetPassword.setUser(optionalUser.get());
-            resetPasswordRepository.save(resetPassword);
-        }
-    }
+//    @Override
+//    public void forgotPassword(String email) {
+//        Optional<User> optionalUser = userRepository.findByEmail(email);
+//        if (optionalUser.isPresent()) {
+//            resetPasswordRepository.deleteByUser(optionalUser.get());
+//            ResetPassword resetPassword = new ResetPassword();
+//            resetPassword.setUser(optionalUser.get());
+//            resetPasswordRepository.save(resetPassword);
+//        }
+//    }
 }
