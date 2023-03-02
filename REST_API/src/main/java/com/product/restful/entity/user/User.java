@@ -82,6 +82,9 @@ public class User extends DateAudit {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserPassword userPassword;
 
+    
+    //https://stackoverflow.com/questions/38817417/what-is-the-meaning-of-hibernate-inversejoincolumns
+    //https://www.baeldung.com/jpa-many-to-many
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",

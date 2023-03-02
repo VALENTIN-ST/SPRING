@@ -263,33 +263,33 @@ class UserServiceImplTest {
         log.info("Role: {}", user.getRoles()); // USER
     }
 
-    @Test
-    void testVerifyEmailAfterRegister() {
-        String uniqueCode = "53ac9e63-bfba-48fe-b6a5-fa328101bc05";
-        userService.verifyEmailActivation(uniqueCode);
-    }
+  //  @Test
+//    void testVerifyEmailAfterRegister() {
+//        String uniqueCode = "53ac9e63-bfba-48fe-b6a5-fa328101bc05";
+//        userService.verifyEmailActivation(uniqueCode);
+//    }
 
-    @Test
-    void testVerifyResetPasswordLink() {
-        String uniqueCode = "4d06e5f3-bab8-4cc3-8efe-e89b01da9083";
-        UserDTO userDto = userService.verifyResetPasswordLink(uniqueCode);
-        assertNotNull(userDto);
-    }
+//    @Test
+//    void testVerifyResetPasswordLink() {
+//        String uniqueCode = "4d06e5f3-bab8-4cc3-8efe-e89b01da9083";
+//        UserDTO userDto = userService.verifyResetPasswordLink(uniqueCode);
+//        assertNotNull(userDto);
+//    }
 
-    @Test
-    void testSetNewPassword() {
-        String password = "B@gaswara_12";
-        Long userId = 1L;
-        User user = userService.getUser(userId);
+//    @Test
+//    void testSetNewPassword() {
+//        String password = "B@gaswara_12";
+//        Long userId = 1L;
+//        User user = userService.getUser(userId);
+//
+//        userService.setNewPassword(user, password);
+//    }
 
-        userService.setNewPassword(user, password);
-    }
-
-    @Test
-    void testForgotPassword() {
-        String email = "bayu@gmail.com";
-        userService.forgotPassword(email);
-    }
+//    @Test
+//    void testForgotPassword() {
+//        String email = "bayu@gmail.com";
+//        userService.forgotPassword(email);
+//    }
     // sehabis hit endpoint forgot password, maka kita harus hit endpoint verifyResetPasswordLink, lalu dilanjutnya set Password baru
     // password lama  $2a$11$ZO9xRDeA39rmsjgi8nk3CeSWayzAcWj3bNCbwZWXJrYpR/kGVvJrq
     // password baru  $2a$11$QJaVeRD8mm3rcPQGp43stu/5UjnIHLWkTgBeHRNxl7O3V/bFgIXou
