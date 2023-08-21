@@ -82,26 +82,26 @@ public class ProductController {
         ListProductResponse allProducts = productService.listAllProduct(listProductRequest);
         return new ResponseEntity<>(new WebResponse<>(Boolean.TRUE, "All products successfully retrieved", allProducts), HttpStatus.OK);
     }
-
-    @GetMapping(value = "/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<WebResponse<List<ProductDTO>>> getProductByName(@PathVariable(name = "name") String name) {
-        List<ProductDTO> products = productService.getProductByNameContaining(name);
-        return new ResponseEntity<>(new WebResponse<>(Boolean.TRUE, "All products successfully retrieved", products), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/name/{name}/price", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<WebResponse<List<ProductDTO>>> getProductByNameAndPriceBetween(
-            @PathVariable(name = "name") String name,
-            @RequestParam(name = "priceMin") BigDecimal priceMin,
-            @RequestParam(name = "priceMax") BigDecimal priceMax) {
-        List<ProductDTO> products = productService.getProductByNameContainingAndPriceBetween(name, priceMin, priceMax);
-        return new ResponseEntity<>(new WebResponse<>(Boolean.TRUE, "All products successfully retrieved", products), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/new/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<WebResponse<Product>> getProductByIdNew(@PathVariable(name = "id") String id) {
-        Product product = productService.getProductByIdRawData(id);
-        return new ResponseEntity<>(new WebResponse<>(Boolean.TRUE, "Product successfully retrieved based on id", product), HttpStatus.OK);
-    }
+//
+//    @GetMapping(value = "/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<WebResponse<List<ProductDTO>>> getProductByName(@PathVariable(name = "name") String name) {
+//        List<ProductDTO> products = productService.getProductByNameContaining(name);
+//        return new ResponseEntity<>(new WebResponse<>(Boolean.TRUE, "All products successfully retrieved", products), HttpStatus.OK);
+//    }
+//
+//    @GetMapping(value = "/name/{name}/price", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<WebResponse<List<ProductDTO>>> getProductByNameAndPriceBetween(
+//            @PathVariable(name = "name") String name,
+//            @RequestParam(name = "priceMin") BigDecimal priceMin,
+//            @RequestParam(name = "priceMax") BigDecimal priceMax) {
+//        List<ProductDTO> products = productService.getProductByNameContainingAndPriceBetween(name, priceMin, priceMax);
+//        return new ResponseEntity<>(new WebResponse<>(Boolean.TRUE, "All products successfully retrieved", products), HttpStatus.OK);
+//    }
+//
+//    @GetMapping(value = "/new/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<WebResponse<ProductDTO>> getProductByIdNew(@PathVariable(name = "id") String id) {
+//        ProductDTO product = productService.getProductById(id);
+//        return new ResponseEntity<>(new WebResponse<>(Boolean.TRUE, "Product successfully retrieved based on id", product), HttpStatus.OK);
+//    }
 
 }

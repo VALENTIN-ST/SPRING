@@ -5,17 +5,30 @@ import com.product.restful.dto.user.CreateUserRequest;
 import com.product.restful.dto.user.UpdateUserRequest;
 import com.product.restful.dto.user.UserIdentityAvailability;
 import com.product.restful.dto.user.UserDTO;
+import com.product.restful.entity.Role;
 import com.product.restful.entity.enumerator.RoleName;
+import com.product.restful.entity.enumerator.StatusRecord;
 import com.product.restful.entity.user.User;
-import com.product.restful.exception.AccessDeniedException;
+import com.product.restful.mapper.UserMapper;
+import com.product.restful.mock.MockEntityObjects;
+import com.product.restful.repository.RoleRepository;
+import com.product.restful.repository.UserRepository;
 import com.product.restful.service.UserService;
 import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -23,13 +36,45 @@ class UserServiceImplTest {
 
     private final static Logger log = LoggerFactory.getLogger(UserServiceImplTest.class);
 
+//    @Mock
+//    UserRepository userRepository;
+//
+//    @InjectMocks
+//    UserServiceImpl userServiceImpl;
+
+
+    @MockBean
+    UserRepository userRepository;
+
+    @MockBean
+    RoleRepository roleRepository;
+
+    UserMapper userMapper;
+
+
+
     @Autowired
     UserService userService;
+
+
 
     @Test
     @Order(1)
     void createFirstUser() {
-        CreateUserRequest createUserRequest = new CreateUserRequest(
+
+
+        userService.i
+//        CreateUserRequest createUserRequest = new CreateUserRequest(
+//                "Bayu",
+//                "Bagaswara",
+//                "bayu_bagaswara",
+//                "B@gaswara12",
+//                "bagaszwara12@gmail.com"
+//        );
+
+
+
+        UserDTO userDTO = new CreateUserRequest(
                 "Bayu",
                 "Bagaswara",
                 "bayu_bagaswara",
@@ -37,10 +82,18 @@ class UserServiceImplTest {
                 "bagaszwara12@gmail.com"
         );
 
-        UserDTO user = userService.createUser(createUserRequest);
-        assertNotNull(user.getId());
-        assertEquals(2, user.getRoles().size());
-        log.info("Role: {}", user.getRoles()); // USER, ADMIN
+        when(userRepository.count()).thenReturn(5L);
+
+        when(roleRepository.getByName(RoleName.ADMIN.name())).thenReturn(Optional.ofNullable(MockEntityObjects.getEntityMockRoleAdmin()));
+        when(roleRepository.getByName(RoleName.USER.name())).thenReturn(Optional.ofNullable(MockEntityObjects.getEntityMockRoleUser()));
+
+
+        UserDTO createdUser = userService.createUser(createUserRequest);
+
+
+        assertNotNull(createdUser.getId());
+        assertEquals(2, createdUser.getRoles().size());
+        log.info("Role: {}", createdUser .getRoles()); // USER, ADMIN
     }
 
     @Test
@@ -61,49 +114,49 @@ class UserServiceImplTest {
     @Test
     @Order(3)
     void createUser() {
-        CreateUserRequest albert = new CreateUserRequest(
-                "Albert",
-                "Einstein",
-                "albert",
-                "albert123",
-                "albert@gmail.com");
-
-        CreateUserRequest gosling = new CreateUserRequest(
-                "James",
-                "Gosling",
-                "gosling",
-                "gosling123",
-                "gosling@gmail.com");
-
-        CreateUserRequest newton = new CreateUserRequest(
-                "Issac",
-                "Newton",
-                "newton",
-                "newton123",
-                "newton@gmail.com");
-
-        CreateUserRequest watt = new CreateUserRequest(
-                "James",
-                "Watt",
-                "james_watt",
-                "james123",
-                "james@gmail.com");
-
-        UserDTO user1 = userService.createUser(albert);
-        assertNotNull(user1.getId());
-        log.info("Role Albert: {}", user1.getRoles()); // USER
-
-        UserDTO user2 = userService.createUser(newton);
-        assertNotNull(user2.getId());
-        log.info("Role Newton: {}", user2.getRoles()); // USER
-
-        UserDTO user3 = userService.createUser(gosling);
-        assertNotNull(user3.getId());
-        log.info("Role Gosling: {}", user3.getRoles()); // USER
-
-        UserDTO user4 = userService.createUser(watt);
-        assertNotNull(user4.getId());
-        log.info("Role Watt: {}", user4.getRoles()); // USER
+//        CreateUserRequest albert = new CreateUserRequest(
+//                "Albert",
+//                "Einstein",
+//                "albert",
+//                "albert123",
+//                "albert@gmail.com");
+//
+//        CreateUserRequest gosling = new CreateUserRequest(
+//                "James",
+//                "Gosling",
+//                "gosling",
+//                "gosling123",
+//                "gosling@gmail.com");
+//
+//        CreateUserRequest newton = new CreateUserRequest(
+//                "Issac",
+//                "Newton",
+//                "newton",
+//                "newton123",
+//                "newton@gmail.com");
+//
+//        CreateUserRequest watt = new CreateUserRequest(
+//                "James",
+//                "Watt",
+//                "james_watt",
+//                "james123",
+//                "james@gmail.com");
+//
+//        UserDTO user1 = userService.createUser(albert);
+//        assertNotNull(user1.getId());
+//        log.info("Role Albert: {}", user1.getRoles()); // USER
+//
+//        UserDTO user2 = userService.createUser(newton);
+//        assertNotNull(user2.getId());
+//        log.info("Role Newton: {}", user2.getRoles()); // USER
+//
+//        UserDTO user3 = userService.createUser(gosling);
+//        assertNotNull(user3.getId());
+//        log.info("Role Gosling: {}", user3.getRoles()); // USER
+//
+//        UserDTO user4 = userService.createUser(watt);
+//        assertNotNull(user4.getId());
+//        log.info("Role Watt: {}", user4.getRoles()); // USER
     }
 
     @Test

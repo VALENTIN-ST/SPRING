@@ -6,7 +6,6 @@ import com.product.restful.dto.product.ListProductResponse;
 import com.product.restful.dto.product.ProductDTO;
 import com.product.restful.dto.product.UpdateProductRequest;
 import com.product.restful.entity.Product;
-import com.product.restful.exception.ResourceNotFoundException;
 import com.product.restful.mapper.ProductMapper;
 import com.product.restful.repository.ProductRepository;
 import com.product.restful.service.ProductService;
@@ -167,6 +166,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductByIdRawData(String id) {
-        return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+        return productRepository.findById(id).orElseThrow(() -> new RuntimeException(id+" not found"));
     }
 }

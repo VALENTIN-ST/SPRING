@@ -1,7 +1,6 @@
 package com.product.restful.repository;
 
 import com.product.restful.entity.Product;
-import com.product.restful.exception.ResourceNotFoundException;
 import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -34,12 +33,12 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     default Product getProductById(String id) {
         return findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+                .orElseThrow(() -> new RuntimeException(id+" not found"));
     }
 
     default Product getProductByName(String name) {
         return findByNameIgnoreCase(name)
-                .orElseThrow(() -> new ResourceNotFoundException("Product", "name", name));
+                .orElseThrow(() -> new RuntimeException(name+" not found"));
     }
 
 }

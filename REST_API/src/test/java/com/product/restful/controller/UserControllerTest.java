@@ -1,59 +1,56 @@
-//package com.product.restful.controller;
-//
-//import com.product.restful.dto.WebResponse;
-//import com.product.restful.dto.product.CreateProductRequest;
-//import com.product.restful.dto.product.ProductDTO;
-//import com.product.restful.dto.product.UpdateProductRequest;
-//import org.junit.jupiter.api.MethodOrderer;
-//import org.junit.jupiter.api.Order;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.TestMethodOrder;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//
-//
-//@SpringBootTest
-//@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-//class ProductControllerTest {
-//
-//    private final static Logger log = LoggerFactory.getLogger(ProductControllerTest.class);
-//
-//    @Autowired
-//    ProductController productController;
-//
-////    @Test
-////    @Order(1)
-////    void createProduct() {
-////        CreateProductRequest createProductRequest = CreateProductRequest.builder()
-////                .name("Test Controller")
-////                .price(new BigDecimal("12345000"))
-////                .quantity(345)
-////                .description("This is test controller product description")
-////                .build();
-////        WebResponse<GetProductResponse> createProductResponse = productController.createProduct(createProductRequest);
-////        assertEquals(HttpStatus.CREATED.value(), createProductResponse.getCode());
-////        assertEquals(HttpStatus.CREATED, createProductResponse.getStatus());
-////        assertNotNull(createProductResponse.getData());
-////        assertNotNull(createProductResponse.getData().getId());
-////        assertNotNull(createProductResponse.getData().getCreatedAt());
-////
-////        log.info("ID: {}", createProductResponse.getData().getId());
-////        log.info("Name: {}", createProductResponse.getData().getName());
-////        log.info("Price: {}", createProductResponse.getData().getPrice());
-////        log.info("Quantity: {}", createProductResponse.getData().getQuantity());
-////        log.info("Description: {}", createProductResponse.getData().getDescription());
-////        log.info("Created By: {}", createProductResponse.getData().getCreatedBy());
-////        log.info("Created At: {}", createProductResponse.getData().getCreatedAt());
-////        log.info("Updated By: {}", createProductResponse.getData().getUpdatedBy());
-////        log.info("Updated At: {}", createProductResponse.getData().getUpdatedAt());
-////    }
-//
+package com.product.restful.controller;
+
+import com.product.restful.dto.BaseController;
+import com.product.restful.dto.WebResponse;
+import com.product.restful.dto.product.CreateProductRequest;
+import com.product.restful.dto.product.ProductDTO;
+import com.product.restful.dto.product.UpdateProductRequest;
+import com.product.restful.dto.user.CreateUserRequest;
+import com.product.restful.dto.user.UserDTO;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+@SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class UserControllerTest extends BaseController {
+
+
+    @Autowired
+    UserController userController;
+
+    @Test
+    @Order(1)
+    void createUser() {
+        CreateUserRequest createUserRequest = CreateUserRequest.builder()
+                .username("perofero")
+                .firstName("pero")
+                .lastName("perovski")
+                .password("abc123")
+                .email("pero@gmail.com")
+                .build();
+//        BaseResponse<UserDTO> createUserResponse = userController.createUser(createUserRequest);
+//        assertEquals(createUserRequest.getUsername() , createUserResponse.get);
+
+
+
+//        assertEquals(HttpStatus.CREATED, createProductResponse.getStatus());
+//        assertNotNull(createProductResponse.getData());
+//        assertNotNull(createProductResponse.getData().getId());
+//        assertNotNull(createProductResponse.getData().getCreatedAt());
+
+    }
+
 //    @Test
 //    @Order(2)
 //    void getProductById() throws RuntimeException {
@@ -122,4 +119,4 @@
 //        // total data 15, karena sudah dihapus 1, maka sisa 14
 //        assertEquals(14, getProductResponse.getData().size());
 //    }
-//}
+}

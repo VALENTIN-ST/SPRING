@@ -16,7 +16,7 @@ public class ProductDTO {
 
     private String id;
     private String name;
-    private BigDecimal price;
+    private Integer price;
     private Integer quantity;
     private String description;
     private Instant createdAt;

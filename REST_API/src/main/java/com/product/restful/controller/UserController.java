@@ -1,5 +1,6 @@
 package com.product.restful.controller;
 
+import com.product.restful.dto.BaseController;
 import com.product.restful.dto.MessageResponse;
 import com.product.restful.dto.WebResponse;
 import com.product.restful.dto.role.CreateRoleRequest;
@@ -10,19 +11,13 @@ import com.product.restful.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+public class UserController extends BaseController {
 
     private final UserService userService;
 
@@ -31,30 +26,30 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<MessageResponse> createUser(@Valid @RequestBody CreateUserRequest user) {
+    public BaseResponse<UserDTO> createUser(@Valid @RequestBody UserDTO user) {
         final UserDTO userDto = userService.createUser(user);
-        return new ResponseEntity<>(new MessageResponse(Boolean.TRUE, String.format("User %s was created successfully", userDto.getUsername()), HttpStatus.CREATED), HttpStatus.CREATED);
+        return ok(userDto);
     }
 
     @PutMapping(value = "/{username}")
-    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'USER')")
-    public ResponseEntity<WebResponse<UserDTO>> updateUser(@Valid @RequestBody UpdateUserRequest newUser, @PathVariable(name = "username") String username) {
+//    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'USER')")
+    public BaseResponse<UserDTO> updateUser(@Valid @RequestBody UpdateUserRequest newUser, @PathVariable(name = "username") String username) {
         final UserDTO userDto = userService.updateUser(username, newUser);
-        return new ResponseEntity<>(new WebResponse<>(Boolean.TRUE, "User updated successfully", userDto), HttpStatus.OK);
+        return ok(userDto);
     }
 
-    @PutMapping(value = "/{username}/addRole")
-    @PreAuthorize(value = "hasAuthority('ADMIN')")
-    public ResponseEntity<MessageResponse> addRoleToUser(@PathVariable(name = "username") String username, @RequestBody CreateRoleRequest createRoleRequest) {
-        userService.addRoleToUser(username, createRoleRequest.getName().toUpperCase());
-        return new ResponseEntity<>(new MessageResponse(Boolean.TRUE, "Successfully added role " + createRoleRequest.getName().toUpperCase() + " to user: " + username), HttpStatus.OK);
+    @PutMapping(value = "/addRole")
+//    @PreAuthorize(value = "hasAuthority('ADMIN')")
+    public BaseResponse<UserDTO>  addRoleToUser(@RequestParam(required = true) String username, @RequestBody CreateRoleRequest createRoleRequest) {
+        UserDTO userDto = userService.addRoleToUser(username, createRoleRequest.getName().toUpperCase());
+        return ok(userDto);
     }
 
-    @DeleteMapping(value = "/{username}")
-    @PreAuthorize(value = "hasAuthority('ADMIN')")
-    public ResponseEntity<MessageResponse> deleteUser(@PathVariable(name = "username") String username) {
+    @DeleteMapping(value = "/deleteUser/{username}")
+//    @PreAuthorize(value = "hasAuthority('ADMIN')")
+    public String deleteUser(@PathVariable(name = "username") String username) {
         userService.deleteUser(username);
-        return new ResponseEntity<>(new MessageResponse(Boolean.TRUE, "You successfully deleted profile of: " + username), HttpStatus.OK);
+        return "You successfully deleted profile of: " + username;
     }
 
 }

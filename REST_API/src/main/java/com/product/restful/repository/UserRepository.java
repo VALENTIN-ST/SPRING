@@ -2,7 +2,6 @@ package com.product.restful.repository;
 
 import com.product.restful.entity.user.User;
 import com.product.restful.entity.user.CustomUserDetails;
-import com.product.restful.exception.ResourceNotFoundException;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,7 +26,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     default User getUserByName(String username) {
         return findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+                .orElseThrow(() -> new RuntimeException(username+" not found"));
     }
 
 }

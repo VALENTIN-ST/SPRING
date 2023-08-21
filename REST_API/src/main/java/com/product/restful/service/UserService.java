@@ -20,9 +20,9 @@ public interface UserService {
 
     UserDTO createAdmin(CreateUserRequest createUserRequest);
 
-    UserDTO createUser(CreateUserRequest createUserRequest);
+    UserDTO createUser(UserDTO userDTO);
 
-    void addRoleToUser(String username, String roleName);
+    UserDTO addRoleToUser(String username, String roleName);
 
     UserDTO getUserById(Long id);
 

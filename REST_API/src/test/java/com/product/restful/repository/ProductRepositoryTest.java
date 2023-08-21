@@ -34,7 +34,7 @@ class ProductRepositoryTest {
     void createProduct() {
         Product product = Product.builder()
                 .name("Test Repository")
-                .price(new BigDecimal(5_000_000))
+                .price(100)
                 .quantity(50)
                 .build();
 
@@ -70,7 +70,7 @@ class ProductRepositoryTest {
     void updateProduct() {
         UpdateProductRequest updateProductRequest = UpdateProductRequest.builder()
                 .name("Test Update Repository")
-                .price(new BigDecimal("678912000"))
+                .price(100)
                 .quantity(123400)
                 .build();
 

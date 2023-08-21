@@ -44,17 +44,19 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String register(RegisterRequest registerRequest) {
-        CreateUserRequest createUserRequest = CreateUserRequest.builder()
-                .firstName(registerRequest.getFirstName())
-                .lastName(registerRequest.getLastName())
-                .email(registerRequest.getEmail())
-                .username(registerRequest.getUsername())
-                .password(registerRequest.getPassword())
-                .build();
+//        CreateUserRequest createUserRequest = CreateUserRequest.builder()
+//                .firstName(registerRequest.getFirstName())
+//                .lastName(registerRequest.getLastName())
+//                .email(registerRequest.getEmail())
+//                .username(registerRequest.getUsername())
+//                .password(registerRequest.getPassword())
+//                .build();
+//
+//        UserDTO user = userService.createUser(createUserRequest);
+//        log.info("Success register user : {}", user.getEmail());
+//        return user.getId().toString();
 
-        UserDTO user = userService.createUser(createUserRequest);
-        log.info("Success register user : {}", user.getEmail());
-        return user.getId().toString();
+        return "";
     }
 
     @Override

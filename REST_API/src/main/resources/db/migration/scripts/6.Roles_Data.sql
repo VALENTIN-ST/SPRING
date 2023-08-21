@@ -1,0 +1,2 @@
+insert into roles (id,name, created_at, status_record, updated_at) values (1,'ADMIN', systimestamp, 'ACTIVE', systimestamp);
+insert into roles (id,name, created_at, status_record, updated_at) values (2,'USER', systimestamp, 'ACTIVE', systimestamp);

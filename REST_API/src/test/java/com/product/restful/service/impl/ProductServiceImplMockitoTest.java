@@ -1,12 +1,13 @@
-package com.product.restful.service.impl;
-
-import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-
-//@SpringBootTest
-class ProductServiceImplMockitoTest {
+//package com.product.restful.service.impl;
+//
+//import org.mockito.Mock;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//import static org.junit.jupiter.api.Assertions.assertNotNull;
+//import static org.junit.jupiter.api.Assertions.assertSame;
+//
+////@SpringBootTest
+//class ProductServiceImplMockitoTest {
 //
 //    private final static Logger log = LoggerFactory.getLogger(ProductServiceImplMockitoTest.class);
 //
@@ -49,5 +50,5 @@ class ProductServiceImplMockitoTest {
 //        log.info("Description: {}", productResponse.getDescription());
 //        log.info("Created At: {}", productResponse.getCreatedAt());
 //        log.info("Created By: {}", productResponse.getCreatedBy());
-   // }
-}
+//    }
+//}

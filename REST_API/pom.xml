@@ -15,6 +15,16 @@
 	<description>Product Restful API</description>
 	<properties>
 		<java.version>17</java.version>
+
+
+<!--		<liquibase.url>jdbc:oracle:thin:@localhost:1521:orcl</liquibase.url>-->
+<!--		<liquibase.driver>com.oracle.database.jdbc</liquibase.driver>-->
+<!--		<liquibase.username>BSP</liquibase.username>-->
+<!--		<liquibase.password>mspass</liquibase.password>-->
+<!--		<liquibase.changeLogFile>db/changelog/db.changelog-master.xml</liquibase.changeLogFile>-->
+<!--		<liquibase.promptOnNonLocalDatabase>false</liquibase.promptOnNonLocalDatabase>-->
+
+
 	</properties>
 
 	<dependencies>
@@ -104,19 +114,14 @@
 			<version>1.3</version>
 			<scope>test</scope>
 		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.liquibase</groupId>-->
+<!--			<artifactId>liquibase-core</artifactId>-->
+<!--			<version>4.8.0</version>-->
+<!--		</dependency>-->
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		<dependency>
    		  <groupId>org.springframework.boot</groupId>
    	 	  <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -126,15 +131,6 @@
    		   <artifactId>ojdbc8</artifactId>
            <scope>runtime</scope>
    		</dependency>
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 
 	</dependencies>

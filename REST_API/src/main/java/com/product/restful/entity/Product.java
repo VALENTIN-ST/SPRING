@@ -36,7 +36,7 @@ public class Product extends UserDateAudit {
     private String name;
 
     @Column(name = "price", nullable = false)
-    private BigDecimal price;
+    private Integer price;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;

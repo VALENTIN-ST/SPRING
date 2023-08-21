@@ -23,7 +23,7 @@ public class UpdateProductRequest {
 
     @NotNull(message = "Price can not null")
     @Min(value = 1, message = "Price must be greater than or equal to 1")
-    private BigDecimal price;
+    private Integer price;
 
     @NotNull(message = "Quantity can not null")
     @Min(value = 0, message = "Quantity must be greater than or equal to 0")

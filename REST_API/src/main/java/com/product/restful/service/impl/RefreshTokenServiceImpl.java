@@ -3,9 +3,6 @@ package com.product.restful.service.impl;
 import com.product.restful.dto.refreshToken.RefreshTokenDTO;
 import com.product.restful.entity.RefreshToken;
 import com.product.restful.entity.user.User;
-import com.product.restful.exception.RefreshTokenNotFoundException;
-import com.product.restful.exception.ResourceNotFoundException;
-import com.product.restful.exception.TokenRefreshException;
 import com.product.restful.mapper.RefreshTokenMapper;
 import com.product.restful.repository.RefreshTokenRepository;
 import com.product.restful.repository.UserRepository;
@@ -35,7 +32,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     public RefreshTokenDTO generateRefreshToken(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException(userId+" not found"));
 
         if (refreshTokenRepository.findByUserId(userId).isPresent()) {
             refreshTokenRepository.delete(user.getRefreshToken());
@@ -58,7 +55,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     public RefreshToken getRefreshToken(String refreshToken) {
-        return refreshTokenRepository.getByRefreshToken(refreshToken).orElseThrow(() -> new RefreshTokenNotFoundException("Invalid refresh token"));
+        return refreshTokenRepository.getByRefreshToken(refreshToken).orElseThrow(() -> new RuntimeException("Invalid refresh token"));
     }
 
     @Override
@@ -67,7 +64,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
         if (token.getExpiryDate().compareTo(Instant.now()) < 0) {
             refreshTokenRepository.delete(token);
-            throw new TokenRefreshException(token.getRefreshToken(), "Refresh token was expired. Please make a new login request");
+            throw new RuntimeException("Refresh token was expired. Please make a new login request");
         }
         return token;
     }

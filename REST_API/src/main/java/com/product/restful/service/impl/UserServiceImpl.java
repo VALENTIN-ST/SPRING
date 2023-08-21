@@ -10,10 +10,6 @@ import com.product.restful.entity.enumerator.RoleName;
 import com.product.restful.entity.user.ResetPassword;
 import com.product.restful.entity.user.User;
 import com.product.restful.entity.user.UserPassword;
-import com.product.restful.exception.AppException;
-import com.product.restful.exception.BadRequestException;
-import com.product.restful.exception.ResetPasswordInvalidException;
-import com.product.restful.exception.ResourceNotFoundException;
 import com.product.restful.mapper.UserMapper;
 import com.product.restful.repository.ResetPasswordRepository;
 import com.product.restful.repository.RoleRepository;
@@ -39,7 +35,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final ResetPasswordRepository resetPasswordRepository;
     private final UserPasswordRepository userPasswordRepository;
-    private final UserMapper userMapper;
+    public final UserMapper userMapper;
 
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, ResetPasswordRepository resetPasswordRepository, UserPasswordRepository userPasswordRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
@@ -63,20 +59,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
+                .orElseThrow(() -> new RuntimeException(userId+" not found"));
     }
 
     @Override
     public void checkUsernameIsExists(String username) {
         if (userRepository.existsByUsername(username)) {
-            throw new BadRequestException(new MessageResponse(Boolean.FALSE, "Username is already taken"));
+            throw new RuntimeException("Username is already taken");
         }
     }
 
     @Override
     public void checkEmailIsExists(String email) {
         if (userRepository.existsByEmail(email)) {
-            throw new BadRequestException(new MessageResponse(Boolean.FALSE, "Email is already taken"));
+            throw new RuntimeException("Email is already taken");
         }
     }
 
@@ -100,39 +96,41 @@ public class UserServiceImpl implements UserService {
 
         user.setRoles(new HashSet<>(Collections.singleton(
                 roleRepository.getByName(RoleName.ADMIN.name())
-                        .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)))));
+                        .orElseThrow(() -> new RuntimeException(USER_ROLE_NOT_SET)))));
 
         userRepository.save(user);
         return userMapper.mapFromUser(user);
     }
 
     @Override
-    public UserDTO createUser(CreateUserRequest userRequest) {
-        checkUsernameIsExists(userRequest.getUsername());
-        checkEmailIsExists(userRequest.getEmail());
+    public UserDTO createUser(UserDTO userDTO) {
+        checkUsernameIsExists(userDTO.getUsername());
+        checkEmailIsExists(userDTO.getEmail());
 
         User user = new User();
-        user.setFirstName(userRequest.getFirstName());
-        user.setLastName(userRequest.getLastName());
-        user.setEmail(userRequest.getEmail());
-        user.setUsername(userRequest.getUsername());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
+        user.setUsername(userDTO.getUsername());
         user.setUserActive(false);
 
         Set<Role> roleSet = new HashSet<>();
-        if (userRepository.count() == 0) {
+        if (userRepository.count() == 0) {//First created user should be admin
             roleSet.add(roleRepository.getByName(RoleName.ADMIN.name())
-                    .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+                    .orElseThrow(() -> new RuntimeException(USER_ROLE_NOT_SET)));
             roleSet.add(roleRepository.getByName(RoleName.USER.name())
-                    .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+                    .orElseThrow(() -> new RuntimeException(USER_ROLE_NOT_SET)));
+        }else{
+            roleSet.add(roleRepository.getByName(RoleName.USER.name())
+                    .orElseThrow(() -> new RuntimeException(USER_ROLE_NOT_SET)));
         }
-        roleSet.add(roleRepository.getByName(RoleName.USER.name())
-                .orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+
         user.setRoles(roleSet);
 
         UserPassword userPassword = new UserPassword();
         userPassword.setUser(user);
-        userPassword.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-//        userPassword.setPassword(userRequest.getPassword());
+//        userPassword.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        userPassword.setPassword(userDTO.getPassword());
         user.setUserPassword(userPassword);
 
         userRepository.save(user);
@@ -146,15 +144,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addRoleToUser(String username, String roleName) {
+    public UserDTO addRoleToUser(String username, String roleName) {
         User user = userRepository.getUserByName(username);
-        user.addRole(roleRepository.getByName(roleName).orElseThrow(() -> new AppException(USER_ROLE_NOT_SET)));
+        user.addRole(roleRepository.getByName(roleName).orElseThrow(() -> new RuntimeException(USER_ROLE_NOT_SET)));
         userRepository.save(user);
+        return userMapper.mapFromUser(user);
     }
 
     @Override
     public UserDTO getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException(id+" not found"));
         return userMapper.mapFromUser(user);
     }
 

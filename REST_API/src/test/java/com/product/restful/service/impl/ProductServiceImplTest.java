@@ -1,7 +1,6 @@
 package com.product.restful.service.impl;
 
 import com.product.restful.dto.product.*;
-import com.product.restful.exception.ResourceNotFoundException;
 import com.product.restful.service.ProductService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -31,7 +30,7 @@ class ProductServiceImplTest {
     void createProduct() {
         CreateProductRequest createProductRequest = CreateProductRequest.builder()
                 .name("Test Service Product")
-                .price(new BigDecimal(134_900_000))
+                .price(100)
                 .quantity(50)
                 .description("This is test service product description")
                 .build();
@@ -61,7 +60,7 @@ class ProductServiceImplTest {
         String productId = "hp-pavilion-x360";
         UpdateProductRequest updateProductRequest = UpdateProductRequest.builder()
                 .name("Test update")
-                .price(new BigDecimal(200_000))
+                .price(100)
                 .quantity(100)
                 .description("Update description")
                 .build();
@@ -82,7 +81,7 @@ class ProductServiceImplTest {
     void deleteProduct() {
         String productId = "acer-nitro-5";
         productService.deleteProduct(productId);
-        assertThrows(ResourceNotFoundException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             ProductDTO product = productService.getProductById(productId);
         });
     }

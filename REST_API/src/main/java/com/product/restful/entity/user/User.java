@@ -44,8 +44,8 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE users SET status_record = 'INACTIVE' WHERE id = ?")
-@Where(clause = "status_record = 'ACTIVE'")
+//@SQLDelete(sql = "UPDATE users SET status_record = 'INACTIVE' WHERE id = ?")
+//@Where(clause = "status_record = 'ACTIVE'")
 public class User extends DateAudit {
 
 	@Id

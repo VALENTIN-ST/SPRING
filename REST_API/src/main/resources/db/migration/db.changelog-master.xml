@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+<!--	<include file="classpath:db/changelog/changes/sprint-0/1.db-tag-v1.xml"/>-->
+<!--    <include file="classpath:db/changelog/changes/sprint-0/2.ARTEMIS-create_groups_table.xml"/>-->
+<!--    <include file="classpath:db/changelog/changes/sprint-0/3.ARTEMIS-create_operations_table.xml"/>-->
+<!--    <include file="classpath:db/changelog/changes/sprint-0/4.ARTEMIS-create_group_operations_table.xml"/>-->
+<!--    <include file="classpath:db/changelog/changes/sprint-0/5.ARTEMIS-create_operation_history_table.xml"/>-->
+<!--    <include file="classpath:db/changelog/changes/sprint-0/6.ARTEMIS-create_configurationsetting_table.xml"/>-->
+<!--    <include file="classpath:db/changelog/changes/sprint-0/7.ARTEMIS-create_configurationsettingvalue_table.xml"/>-->
+<!--    <include file="classpath:db/changelog/changes/sprint-0/8.ARTEMIS-insert_groups_table.xml"/>-->
+<!--	<include file="classpath:db/changelog/changes/sprint-0/9.ARTEMIS-insert_operations_table.xml"/>-->
+<!--	<include file="classpath:db/changelog/changes/sprint-0/10.ARTEMIS-insert_configurationsettingvalue_table.xml"/>-->
+<!--	<include file="classpath:db/changelog/changes/sprint-0/11.db-tag-v2.xml"/>-->
+
+</databaseChangeLog>
+
+
+
+
+

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.product.restful.entity.audit.DateAudit;
 import com.product.restful.entity.enumerator.RoleName;
 import com.product.restful.entity.enumerator.StatusRecord;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -31,6 +28,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE roles SET status_record = 'INACTIVE' WHERE id = ?")
 @Where(clause = "status_record = 'ACTIVE'")
+@Builder
 public class Role extends DateAudit {
 
 	@Id

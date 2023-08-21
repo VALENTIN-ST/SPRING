@@ -9,7 +9,6 @@ import com.product.restful.dto.auth.LoginRequest;
 import com.product.restful.dto.auth.RegisterRequest;
 import com.product.restful.dto.user.UserDTO;
 import com.product.restful.entity.user.User;
-import com.product.restful.exception.ResourceNotFoundException;
 import com.product.restful.repository.UserRepository;
 import com.product.restful.service.AuthService;
 import com.product.restful.service.UserService;
